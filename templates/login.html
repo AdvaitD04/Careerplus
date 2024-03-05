@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/loginsignup.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Login</title>
+</head>
+<body>
+  <div class="wrapper">
+	<div class="logo"><img src="static/img/logo.png"></img></div>
+    <div class="container main">
+        <div class="row">
+            <div class="col-md-6 left">
+                       
+                <!-------------      image     ------------->
+                <span>Welcome to <span>Carrier+</span></span>
+				<span>New to Carrier+</span>
+                
+                
+                
+            </div>
+
+            <div class="col-md-6 right">
+                
+                <div class="input-box">
+                   
+                   <header style="font-size: 30px;">Login</header>
+                   
+                   <!-- Form with post action -->
+                   <form method="post" action="{{url_for('loginuser')}}">
+                       <div class="input-field">
+                            <input type="email" class="input" id="email" name="email" required="" autocomplete="off">
+                            <label for="email">Email</label> 
+                        </div> 
+                       <div class="input-field">
+                            <input type="password" class="input" id="pass" name="password" required="">
+                            <label for="pass">Password</label>
+                        </div>
+						 
+                       <div class="input-field">
+                            <input type="submit" class="submit" value="Login">
+                       </div> 
+                   </form>
+                   <!-- End of Form -->
+                   
+                   <div class="signin">
+                    <span>New to Career+? <a href="{{url_for('signup')}}">Signup here</a></span>
+                   </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
