@@ -2,12 +2,21 @@ from flask import Flask,render_template,request,redirect, url_for, session, flas
 from flask_pymongo import PyMongo
 from datetime import datetime
 from bson import ObjectId
+from cryptography.fernet import Fernet
 app = Flask(__name__)
 
 # mongodb connection
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/Carrierplus'
 app.config['SECRET_KEY'] = 'afdglnalnheognohe'
 mongo = PyMongo(app)
+
+
+#cryptography fernet
+# Fernet key setup for encryption/decryption
+file = open('key.key', 'rb')
+key = file.read()
+file.close()
+f = Fernet(key)
 
 @app.route('/')
 def hello_world():
@@ -18,18 +27,26 @@ def loginuser():
   if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        user = mongo.db.register.find_one({'email': email, 'password': password})
+        radio = request.form['radiobtn']
 
+        user = mongo.db.register.find_one({'email': email,'type': radio})
+
+    
         if user:
-            session['loginuser'] = True
-            session['user'] = str(user['_id'])
-            session['userid'] = user['userid']
-            use = session['userid']
-            return redirect(url_for('dashboard', us=use))
+            test = f.decrypt(user['password']).decode()
+            if test == password:
+              session['loginuser'] = True
+              session['user'] = str(user['_id'])
+              session['userid'] = user['userid']
+              use = session['userid']
+              return redirect(url_for('dashboard', us=use))
+            else:
+              flash('Invalid username or password', 'error')  # Flash an error message
+              return redirect(url_for('loginuser'))
         else:
-            print("error")
-            
-            return redirect(url_for('login'))
+              flash('Invalid username or password', 'error')  # Flash an error message
+              return redirect(url_for('loginuser'))    
+
   return render_template('login.html')
   
 
@@ -42,9 +59,19 @@ def signup():
             email = request.form['email']
             password = request.form['password']
             repass = request.form['confirm_password']
+            radio = request.form['radiobtn']
+           
+
             if password == repass:
-                users = {'userid': userid, 'email': email, 'password': password, 'date_created': datetime.utcnow()}
-                mongo.db.register.insert_one(users)
+                user = mongo.db.register.find_one({'userid': userid})
+                if user:
+                    flash('Email or username already exists', 'error')  # Flash an error message
+                    return redirect(url_for('signup'))
+                
+                else:
+                    password = f.encrypt(password.encode()).decode()
+                    users = {'userid': userid, 'email': email, 'password': password,'type': radio ,'date_created': datetime.utcnow()}
+                    mongo.db.register.insert_one(users)
             else:
                 return redirect(url_for('register'))
 

@@ -431,7 +431,7 @@ nav .left button:hover{
     background-position: left;
     background-repeat: no-repeat;
     background-size: cover;
-    background-color:#d0eace98;
+    background-color:#d0eace66;
 
     border-radius: 30px;
     width:95vw;
@@ -596,21 +596,23 @@ nav .left button:hover{
 /* setion4 css */
 .section4{
     width:100vw;
-    height:450px;
+    height:max(450px,auto);
     position:relative;
-    margin:20px auto;
+    margin:auto;
+    padding: 40px 0px;
     background-image: url("setion4bg.jpg");
     
     background-size: cover;
-    background-color:#e9f2e898;
+    background-color:#e7e7e756;
+   
     display:flex;
      justify-content: center;
      align-items: center;
-     border-radius: 50px;
+     /* border-radius: 50px; */
      
 }
 .section4 .box{
-    position: absolute;
+    position: relative;
     
     height:max(80%,auto);
     width:95%;
@@ -629,7 +631,6 @@ nav .left button:hover{
     align-items: flex-start;
     height:140px;
     width:479px;
-    
     margin:0px 0px 0px 20px;
     border-radius:10px;
     gap:10px;
@@ -665,6 +666,7 @@ nav .left button:hover{
     gap:15px;
     box-shadow: 0px -25px 20px -20px rgba(0, 0, 0, 0.45);
     color:rgb(0, 0, 0);
+    
     
     
         
@@ -705,6 +707,10 @@ nav .left button:hover{
 }
 
 /* section5 css */
+.session5{
+    background-color: #4bb6537b;
+    padding:200px 0px;
+}
 .section5 .box{
    
     overflow: hidden;
@@ -719,7 +725,7 @@ nav .left button:hover{
  .section5 .box .left{
     position: relative;
     width:50%;
-    background-color:rgba(255, 255, 255, 0.793);
+    background-color:rgba(255, 255, 255, 0.162);
     
     display: flex;
     justify-content: center;
@@ -730,7 +736,7 @@ nav .left button:hover{
 }
 
 
-.section5 .box .left>:nth-child(1){
+.section5 .box .left :nth-child(1){
     font-size: 48px;
     font-weight: bold;
 }
@@ -769,11 +775,11 @@ nav .left button:hover{
 .section5 .box .right img{
     position: relative;
     width: 100%;
-    height: 113%;
+    height: 116%;
     margin: auto;
     z-index: 2;
-    top: -7%;
-    left: 9%;
+    top: -8%;
+    left: 5%;
 }
 
 .section5 .box .right svg{
@@ -782,8 +788,8 @@ nav .left button:hover{
     height: 81%;
     margin: auto;
     z-index: 1;
-    left: 15%;
-    top: 8%;
+    left: 18%;
+    top: 5%;
 }
 
 @keyframes moveBlob {
@@ -819,9 +825,99 @@ nav .left button:hover{
 }
   
 
-
 /* section6 */
 .section6 {
+   
+    
+    max-width: 100vw;
+    height:350px;
+    margin:auto;
+    
+    
+    position: relative;
+    /* background-color: #2d9133; */
+    
+    
+    
+}
+
+
+.section6 .box{
+     background-color: rgba(183, 238, 156, 0.74);
+    background-image:url("img/landingpg/sect6bg.png");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width:93%;
+    margin:auto;
+    position: relative;
+    /* background-color: rgba(187, 225, 161, 0.177); */
+    height:90%;
+    border-radius: 30px;
+    
+}
+.section6 .box .txt{
+   
+    position: relative;
+   width:60%;
+   /* background-color: rgb(52, 153, 39); */
+   height:100%;
+   align-items: flex-start;
+   padding:20px;
+   border-radius: 10px;
+}
+
+.section6 .box .txt>:nth-child(1){
+   font-size: 38px;
+}
+
+.section6 .box .txt>:nth-child(2){
+    font-size: 28px;
+ }
+
+
+
+
+.section6 .box .right{
+    height: 100%;
+    position: relative;
+    left:0px;
+    width:40%;
+    /* background-color: #0303035e; */
+    
+ }
+
+ .section6 .box .right button{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap:0px 5px;
+    font-size: 20px;
+    color:rgb(255, 255, 255);
+    padding:15px 20px;
+    background-color: green;
+    border-radius: 10px;
+    box-shadow: none;
+    border:none;
+    font-weight: lighter;
+}
+
+.section6 .box:hover{
+   transform: scale(1.02);
+   transition: transform 0.3s;
+}
+
+.section6 .box .right button:hover{
+    transform: scale(1.1);
+    transition: transform 0.3s;
+    
+}
+    
+
+
+
+
+.section7 {
    
     
     max-width: 100vw;
@@ -834,19 +930,19 @@ nav .left button:hover{
     
 }
 
-.section6 .box{
+.section7 .box{
     width: 95%;
     height:95%;
     margin:auto;
    
     position: absolute;
-    background-color: #987d1f;
+    background-color: #4d981f;
     justify-content: flex-start;
     align-items: flex-start;
 
 }
 
-.section6 .box .top{
+.section7 .box .top{
     position:relative;
     height:30%;
     width:100%;
@@ -854,7 +950,7 @@ nav .left button:hover{
 
 }
 
-.section6 .box .bottom{
+.section7 .box .bottom{
     position:relative;
     height:70%;
     width:100%;
@@ -862,18 +958,18 @@ nav .left button:hover{
 
 }
 
-.section7{
+.footer{
     max-width: 100vw;
-    height:300px;
+    height:max(300px,auto);
     margin: auto;
     position: relative;
-    background-color: #93e1873f;
-    border-radius: 20px 20px 00px 00px;
+    background-color:#67676756;
+    /* border-radius: 20px 20px 00px 00px; */
     gap:20px;
 
 }
 
-.section7 .box{
+.footer .box{
     position:relative;
     width: 95%;
     position: sticky;
@@ -899,7 +995,7 @@ nav .left button:hover{
 }
 
 
-.section7 .box :nth-child(n){
+.footer .box :nth-child(n){
     align-items: flex-start;
     list-style: none;
     justify-content: center;
@@ -909,19 +1005,19 @@ nav .left button:hover{
 
 }
 
-.section7 .box .p >:nth-child(1){
+.footer .box .p >:nth-child(1){
    font-size:20px;
    font-weight:bold;
 }
 
-.section7 .box .p1 img{
+.footer .box .p1 img{
    width:200px;
    height: auto;
     
 
 }
 
-.section7 .copyrt{
+.footer .copyrt{
     justify-content: center;
     
      

@@ -13,11 +13,11 @@
 	<div class="logo"><a href="index.html"><img src="static/img/logo.png"></a></div>
     <div class="container main">
         <div class="row">
-            <div class="col-md-6 left">
+            <div class="col-md-6 left" id="color">
                        
                 <!-- Image -->
                 <span>Welcome to <span>Carrier+</span></span>
-				<span>New to Carrier+</span>
+				<span>Select type employee or employer</span>
                 
             </div>
 
@@ -45,10 +45,26 @@
                             <input type="password" class="input" id="passcnf" name="confirm_password" required="">
                             <label for="passcnf">Confirm Password</label>
                         </div> 
+
+                        <div class ="rad">
+                            <input type="radio" class="radio-button" id ="employee" label="Employee" name="radiobtn" value="Employee" required="">
+                            <input type="radio" class="radio-button" label="Employer"  id ="employer" name="radiobtn" value="Employer" required="">
+                            <!-- Hidden input field to store selected option -->
+                            <input type="hidden" id="selected_option" name="selected_option" value="Employee" required="">
+                        </div> 
                        <div class="input-field">
                             <input type="submit" class="submit" value="Sign Up">
                        </div> 
+                       
                    </form>
+                   {% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+  {% for category, message in messages %}
+    <div class="alert alert-{{ category }}" style="color:red">{{ message }}</div>
+  {% endfor %}
+{% endif %}
+{% endwith %}
+
                    <!-- End of Form -->
                    
                    <div class="signin">
@@ -59,5 +75,33 @@
         </div>
     </div>
 </div>
+<script>
+   //for dom mapulation 
+document.querySelectorAll('.radio-button').forEach((radio) => {
+    radio.addEventListener('change', function() {
+        if (this.checked && this.id === 'employee') {
+            Functionchange1();
+        } else if (this.checked && this.id === 'employer') {
+            // Do something else when employer is selected
+            Functionchange2();
+        }
+    });
+});
+
+function Functionchange1() {
+    // Your function code here
+    console.log("Start function triggered! employee ");
+    document.querySelector('.left span:nth-child(2)').innerHTML = "Signing up as a <b> <h4>Employee<h4><b>";
+}
+
+function Functionchange2() {
+    // Your function code here
+    console.log("Start function triggered! employee ");
+    document.querySelector('.left span:nth-child(2)').innerHTML = "Signing up as a <b> <h4>Employer<h4><b>";
+}
+
+
+    </script>
+    
 </body>
 </html>
