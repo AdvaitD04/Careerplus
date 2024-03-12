@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        /* CSS styles for the profile form */
+        .section {
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        /* Popup container */
+        #popupContainer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Popup content */
+        .popup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 500px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <h1>User Profile</h1>
+    <button id="openPopupBtn">Open Profile</button>
+
+    <div id="popupContainer">
+        <div class="popup">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <div id="sections">
+                <div id="personalInfoSection" class="section" style="display: block;">
+                    <h2>Personal Info</h2>
+                    <input type="text" id="name" placeholder="Name">
+                    <input type="email" id="email" placeholder="Email">
+                    <!-- Image upload field -->
+                    <input type="file" id="image" accept="image/*">
+                    <!-- Other personal info fields -->
+                    <button onclick="savePersonalInfo()">Next</button>
+                </div>
+                <div id="experienceSection" class="section">
+                    <h2>Experience</h2>
+                    <input type="text" id="position" placeholder="Position">
+                    <input type="text" id="company" placeholder="Company">
+                    <!-- Other experience fields -->
+                    <button onclick="saveExperience()">Next</button>
+                </div>
+                <!-- Add more sections as needed -->
+            </div>
+            <button id="submitButton" style="display: none;" onclick="submitProfile()">Submit Profile</button>
+        </div>
+    </div>
+
+    <script>
+        var profileData = JSON.parse(localStorage.getItem('profileData')) || {};
+
+        window.addEventListener('DOMContentLoaded', function() {
+            populateFormFields(profileData);
+        });
+
+        function populateFormFields(profileData) {
+            document.getElementById('name').value = profileData.personal_info?.name || '';
+            document.getElementById('email').value = profileData.personal_info?.email || '';
+            document.getElementById('position').value = profileData.experience?.position || '';
+            document.getElementById('company').value = profileData.experience?.company || '';
+        }
+
+        function saveData() {
+            profileData.personal_info = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value
+            };
+            profileData.experience = {
+                position: document.getElementById('position').value,
+                company: document.getElementById('company').value
+            };
+            // Handle image upload
+            var imageInput = document.getElementById('image');
+            if (imageInput.files.length > 0) {
+                var imageFile = imageInput.files[0];
+                // You can handle the image file here, e.g., upload it to a server or process it in some way
+                // For now, let's just store the file name in profileData
+                profileData.image = imageFile.name;
+            }
+            localStorage.setItem('profileData', JSON.stringify(profileData));
+        }
+
+        document.getElementById('name').addEventListener('input', saveData);
+        document.getElementById('email').addEventListener('input', saveData);
+        document.getElementById('position').addEventListener('input', saveData);
+        document.getElementById('company').addEventListener('input', saveData);
+        document.getElementById('image').addEventListener('change', saveData);
+
+        function savePersonalInfo() {
+            saveData();
+            showNextSection();
+        }
+
+        function saveExperience() {
+            saveData();
+            showNextSection();
+        }
+
+        function showNextSection() {
+            var currentSection = document.querySelector('.section[style="display: block;"]');
+            
+            if (currentSection) {
+                currentSection.style.display = 'none';
+                var nextSection = currentSection.nextElementSibling;
+                while (nextSection) {
+                    if (nextSection.classList.contains('section')) {
+                        nextSection.style.display = 'block';
+                        return;
+                    }
+                    nextSection = nextSection.nextElementSibling;
+                }
+                document.getElementById('submitButton').style.display = 'block';
+            } else {
+                console.error('No section with display block found.');
+            }
+        }
+
+        function submitProfile() {
+            fetch('/profile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(profileData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Profile submitted successfully');
+                    localStorage.removeItem('profileData');
+                    window.location.reload();
+                } else {
+                    alert('Failed to submit profile');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while submitting profile');
+            });
+        }
+
+        function openPopup() {
+            document.getElementById("popupContainer").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("popupContainer").style.display = "none";
+        }
+
+        function retrieveProfileData() {
+            fetch('/profile')
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    const profileData = data[0]; // Assuming only one profile is retrieved
+                    populateFormFields(profileData);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        document.getElementById("openPopupBtn").addEventListener("click", openPopup);
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Profiles</title>
+    <style>
+        /* Add your CSS styles here */
+        .profile-image {
+            max-width: 100px;
+            max-height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>All Profiles</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Image</th>
+                <!-- Add more table headers for other profile fields -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for profile in profiles %}
+            <tr>
+                <td>{{ profile.personal_info.name }}</td>
+                <td>{{ profile.personal_info.email }}</td>
+                <td><img src="{{ url_for('static', filename='images/' + profile.image) }}" alt="Profile Image" class="profile-image"></td>
+                <!-- Add more table cells for other profile fields -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
