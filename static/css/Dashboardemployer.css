@@ -76,12 +76,11 @@ body::-webkit-scrollbar {
     overflow: hidden;
     border-radius:0px 0px 10px 10px;
     z-index:10;
-    
     background-color: rgb(255, 255, 255);
     
 }
 
-nav .centernav{
+/* nav .centernav{
     text-decoration: none;
     font-size: 20px;
     margin:0px auto;
@@ -104,7 +103,7 @@ nav .centernav a{
     color: rgb(0, 0, 0);
     transition: color 0.3s, text-decoration 0.3s;
 
-}
+} */
 
 nav .logo{
     width:110px;
@@ -146,6 +145,19 @@ nav .left a:hover {
     
 }
 
+nav .left span{
+    text-decoration: none;
+    font-size: 20px;
+    /* font-weight: bold; */
+    margin: 0px 5px;
+    color: rgb(0, 0, 0);
+    padding: 4px 10px;
+    margin:0px 5px;
+    border-radius: 6px;
+    border:1px solid black;
+
+}
+
 nav .left .logo{
     text-decoration: none;
     font-size: 20px;
@@ -165,19 +177,6 @@ nav .left button{
     cursor: pointer;
     
     
-}
-
-nav .left span{
-    text-decoration: none;
-    font-size: 20px;
-    /* font-weight: bold; */
-    margin: 0px 5px;
-    color: rgb(0, 0, 0);
-    padding: 4px 10px;
-    margin:0px 5px;
-    border-radius: 6px;
-    border:1px solid black;
-
 }
 
 /* secssion1 hover and ani */
@@ -248,7 +247,7 @@ nav .left button:hover{
     position:relative;
     height:150px;
     width:90%;
-    background-color: rgba(216, 244, 206, 0.625);
+    background-color: rgb(150, 150, 59);
     border-radius: 10px;
     margin:auto;
 }
@@ -270,27 +269,14 @@ nav .left button:hover{
     border-radius: 10px;
     height:40px;
     width:95%;
-    background-color: rgba(230, 230, 230, 0.416);
+    background-color: rgb(25, 184, 99);
     justify-content: flex-start;
     padding:0px 10px;
-    font-size: 20px;
-    border:1px solid rgba(184, 184, 184, 0.614);
-
-
-}
-/* all hover and animation */
-.middle .midleft .box .allsection button:hover{
-    
-    background-color: rgba(209, 232, 200, 0.416);
-    
-    border:1px solid rgba(184, 184, 184, 0.614);
 
 
 }
 
 
-
-/* for midright */
 
 .middle .midright{
     
@@ -298,7 +284,7 @@ nav .left button:hover{
     position:relative;
     height:auto;
     width:80%;
-    background: rgba(230, 230, 230, 0.636);
+    background-color: orange;
     justify-content: center;
     margin:auto;
 }
@@ -307,7 +293,7 @@ nav .left button:hover{
     
     height:auto;
     width:100%;
-    /* background: rgba(186, 186, 186, 0.514); */
+    background: rgba(129, 49, 49, 0.715);
     align-items: flex-start;
     position:relative;
     
@@ -318,12 +304,10 @@ nav .left button:hover{
 .middle .midright .box1{
     position:relative;
     height:auto;
-    width:95%;
-    margin:auto;
-    /* background-color: rgb(47, 176, 99); */
+    width:97%;
+    background-color: rgb(47, 176, 99);
     border-radius:20px;
     margin-top:20px;
-
 
 
 }
@@ -335,16 +319,12 @@ nav .left button:hover{
 }
 
 .middle .midright .box1 .datasection{
-    /* border:1px solid black; */
-    background-color: white;
+    border:1px solid black;
     display: grid;
     height:auto;
     grid-template-columns: 50% 50%;
-    margin:20px 0px;
-    padding:40px 0px;
+    margin:30px 0px;
     justify-content: center;
-    border-radius: 20px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     
 }
 
@@ -366,11 +346,10 @@ select {
     width: 350px;
     padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid #a6a6a6;
+    border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 16px;
-    background-color: rgba(207, 244, 206, 0.084);
 }
 
 /* for save and edit button */
@@ -383,7 +362,7 @@ select {
     
    
     padding: 10px 50px;
-    background-color: #15ff00a2;
+    background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 5px;

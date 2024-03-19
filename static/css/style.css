@@ -732,7 +732,7 @@ nav .left button:hover{
 
 .section6 .box{
      background-color: rgba(183, 238, 156, 0.74);
-    background-image:url("img/landingpg/sect6bg.png");
+    background-image:url("../img/landingpg/sect6bg.png");
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -998,8 +998,6 @@ align-items: flex-start;
 
 .footer .copyrt{
     justify-content: center;
-    
-     
  
  }
 

@@ -112,6 +112,12 @@
     background-color: #92d59194;
 }
 
+.left >:nth-child(2){
+flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+
 
 .row{
   width:  900px;
