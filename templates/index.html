@@ -293,7 +293,7 @@
 
    <div class="footer flexbc">
     <div class="box flexbr">
-        <div class="p p1 flexbc"><img src ="static/img/logo.png"><span>Joobs is the largest talent platform in Southeast Asia and Taiwan for career development and recruitment.</span></div>
+        <div class="p p1 flexbc"><img src ="static/img/logo.png"><span>Careerplus is one of the best job finding platform for career development and recruitment.</span></div>
         <div class="p p2 flexbc"><li>Employer</li><li>About Us</li><li>Careers</li><li>Blog</li></div>
         <div class="p p3 flexbc">
             <li>Find Vacancy Based On</li><li>Help Center</li><li>job Location</li><li>Company Name</li>
@@ -307,20 +307,35 @@
 
 </body>
 <script>
-    document.getElementById('scrollLeft').addEventListener('click', function() {
-        document.getElementById('scrollContainer').scrollLeft -= 400;
-        document.querySelector('#scrollLeft svg').setAttribute('fill', 'green');
-        setTimeout(function() {
-        document.querySelector('#scrollLeft svg').setAttribute('fill', 'grey');
-    }, 200);
-    });
+   document.getElementById('scrollLeft').addEventListener('click', function() {
+    smoothScroll(document.getElementById('scrollContainer'), -400);
+});
 
-    document.getElementById('scrollRight').addEventListener('click', function() {
-        document.getElementById('scrollContainer').scrollLeft += 400;
-        document.querySelector('#scrollRight svg').setAttribute('fill', 'grey');
-        setTimeout(function() {
-        document.querySelector('#scrollRight svg').setAttribute('fill', 'green');
-    }, 200);
-    });
+document.getElementById('scrollRight').addEventListener('click', function() {
+    smoothScroll(document.getElementById('scrollContainer'), 400);
+});
+
+function smoothScroll(element, distance) {
+    const scrollLeft = element.scrollLeft;
+    const targetScrollLeft = scrollLeft + distance;
+    const duration = 200; // Adjust the duration as needed
+
+    const startTime = performance.now();
+    function step() {
+        const currentTime = performance.now();
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        element.scrollLeft = scrollLeft + distance * easeInOutCubic(progress);
+
+        if (progress < 1) {
+            requestAnimationFrame(step);
+        }
+    }
+    requestAnimationFrame(step);
+}
+
+// Easing function for smoother scroll
+function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+}
 </script>
 </html>

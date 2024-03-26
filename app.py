@@ -1,7 +1,7 @@
 from flask import Flask,render_template,request,redirect, url_for, session, flash, abort,jsonify
 from flask_pymongo import PyMongo
 from datetime import datetime
-from bson import ObjectId
+from bson import ObjectId,json_util
 from cryptography.fernet import Fernet
 app = Flask(__name__)
 
@@ -131,13 +131,22 @@ def data_all():
 
 @app.route('/jobemployer')
 def jobemployer():
-
     if 'user' not in session:
         return redirect(url_for('loginuser'))
     
-    us = session['userid']
-    return render_template('jobemployer.html',us=us)    
+    # Query MongoDB for job data (e.g., retrieve 10 job entries)
+    job_entries = mongo.db.jobentries.find().limit(10)
 
+    # Convert MongoDB cursor to a list of dictionaries
+    job_data = [entry for entry in job_entries]
+
+    # Remove _id field from each document
+    for job in job_data:
+        job.pop('_id', None)
+
+    # Render the template with job data
+    us = session['userid']
+    return render_template('jobemployer.html', job_data=job_data, us=us)
 
 #  for dashboard by user
 @app.route('/Dashboardemp', methods=['GET', 'POST'])
@@ -183,21 +192,26 @@ def dashboardemployer():
         # Retrieve the JSON data from the request
         data = request.json
         user_id = session.get('userid')
+        if 'personal_info' in data: 
         # Update the data for the user ID if it already exists, otherwise insert new data
-        existing_data = mongo.db.profileemployer.find_one({"user_id": user_id})
-        if existing_data:
-              mongo.db.profileemployer.update_one({"user_id": user_id}, {"$set": {"personal_info": data['personal_info']}}, upsert=True)
+         existing_data = mongo.db.profileemployer.find_one({"user_id": user_id})
+         if existing_data:
+               mongo.db.profileemployer.update_one({"user_id": user_id}, {"$set": {"personal_info": data['personal_info']}}, upsert=True)
         
         
-        else:
+         else:
+             data['user_id'] = user_id
+             mongo.db.profileemployer.insert_one(data)
+        
+         print("Received data:", data)
+         return jsonify({"message": "Data received successfully"}), 200
+        
+        if 'General_info' in data:
             data['user_id'] = user_id
-            mongo.db.profileemployer.insert_one(data)
-        
-        print("Received data:", data)
-        return jsonify({"message": "Data received successfully"}), 200
+            mongo.db.jobentries.insert_one(data)
 
-    # If it's a GET request or if the POST request doesn't have JSON data
-    # Retrieve the existing data for the user ID
+
+    
     user_id = session.get('userid')
     data = mongo.db.profileemployer.find_one({"user_id": user_id})
     

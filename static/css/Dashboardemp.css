@@ -221,6 +221,8 @@ nav .left button:hover{
     background-color: rgba(255, 255, 255, 0.907);
     justify-content: flex-start;
     align-items: flex-start;
+    position:sticky;
+    top:60px;
     
     
 
@@ -231,7 +233,7 @@ nav .left button:hover{
     top:0px;
    
     width:95%;
-    /* background-color: rgb(35, 35, 33); */
+    background-color: rgba(255, 255, 255, 0);
     margin:auto;
     margin-top:20px;
     justify-content: flex-start;
@@ -251,6 +253,92 @@ nav .left button:hover{
     background-color: rgba(216, 244, 206, 0.625);
     border-radius: 10px;
     margin:auto;
+   justify-content: flex-start;
+   
+}
+
+.middle .midleft .box .prof .boxr{
+    position:relative;
+   
+    justify-content: flex-start;
+
+    height:100%;
+    width:35%;
+    /* background-color: rgba(37, 95, 16, 0.625); */
+   
+    
+}
+
+
+.middle .midleft .box .prof .boxr .imgbox{
+    position:relative;
+    margin:15px 0px;
+    height:55%;
+    width:90%;
+    background-color: rgba(181, 181, 181, 0.625);
+    border-radius: 50%;
+   
+    
+}
+
+.middle .midleft .box .prof .boxr .imgbox img{
+    position:relative;
+    height:100%;
+    width:100%;
+    border-radius: 50%;
+   
+    
+}
+
+
+
+.middle .midleft .box .prof .boxl{
+    position:relative;
+    height:100%;
+    width:65%;
+    /* background-color: rgba(10, 11, 10, 0.625); */
+   
+    
+}
+
+.middle .midleft .box .prof .boxl .userdata{
+    position:relative;
+    height:80%;
+    width:80%;
+    /* background-color: rgba(10, 11, 10, 0.625); */
+    gap:10px;
+    /* justify-content: flex-start; */
+    align-items: flex-start;
+    
+   
+    
+}
+
+.middle .midleft .box .prof .boxl .userdata >:nth-child(1){
+    position:relative;
+    font-size:24px;
+    color: rgb(74, 74, 74);
+    gap:5px;
+
+   
+    
+}
+
+.middle .midleft .box .prof .boxl .userdata >:nth-child(2){
+    position:relative;
+    font-size:18px;
+    color: rgb(37, 37, 37);
+ 
+}
+
+.middle .midleft .box .prof .boxl .userdata >:nth-child(3) button{
+    position:relative;
+    font-size:16px;
+    background-color: var(--butcolor);
+    padding:5px 10px;
+    border-radius: 10px;
+   cursor: pointer;
+ 
 }
 
 .middle .midleft .box .allsection{
@@ -275,9 +363,12 @@ nav .left button:hover{
     padding:0px 10px;
     font-size: 20px;
     border:1px solid rgba(184, 184, 184, 0.614);
+    cursor: pointer;
 
 
 }
+
+
 /* all hover and animation */
 .middle .midleft .box .allsection button:hover{
     

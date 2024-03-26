@@ -16,6 +16,7 @@
     <div id="popup" class="popup">
                 Data saved successfully
             </div>
+            
     <div class="navbox">
         <nav>
             <div class="logo">
@@ -26,8 +27,9 @@
                 <a href="Home">Home</a>
                 <a href="#">About</a>
                 <a href="#">Help</a>
-                <a href="{{url_for('logout')}}"><button>LogOut</button></a>
-                <span>{{uid}}</span>
+                <!-- <a href="{{url_for('logout')}}"><button>LogOut</button></a> -->
+                <span>Employee</span>
+
 
             </div>
         </nav>
@@ -35,12 +37,24 @@
     <div class="middle flexbr">
         <div class="midleft">
             <div class="box flexbc">
-                <div class="prof"></div>
+                <div class="prof flexbr">
+                    <div class="boxr flexbc"><div class="imgbox"><img src = "static/img/empdashboard/testimg.jpg"></div></div>
+                    <div class="boxl flexbc"><div class="userdata flexbc">
+                        <span class="flexbr">Employer
+                            <svg  width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                      </svg>
+                    </span>
+                      <span>{{uid}}</span>
+                      <a href="{{url_for('logout')}}"><button>LogOut</button></a>
+                    </div>
+                </div>
+                </div>
                 <div class="allsection flexbc">
                     <button class="flexbr" onclick ="showprofile()">Profile</button>
                     <button class="flexbr">Resume</button>
-                    <button class="flexbr">Find a job</button>
-                    <button class="flexbr" href="{{url_for('logout')}}">Logout</button>
+                    <button class="flexbr"><a href="{{url_for('jobemployer')}}" style="text-decoration: none; color:black ;">Find a job</a></button>
+                    <button class="flexbr"><a href="{{url_for('logout')}}" style="text-decoration: none; color:black ;">Logout</a></button>
 
                 </div>
             </div>
@@ -149,13 +163,13 @@
                                 <option value="Development" {% if data.personal_info.job_category == 'Development' %} selected {% endif %}>Development</option>
                                 <option value="Video Editing" {% if data.personal_info.job_category == 'Video Editing' %} selected {% endif %}>Video Editing</option>
                                 <option value="Design" {% if data.personal_info.job_category == 'Design' %} selected {% endif %}>Design</option>
-                                <!-- Add more job categories as needed -->
+                          
                             </select>
                         </div>
                         
 
                     </form>
-                    <!-- Additional fields from provided code -->
+                   
                     <div class="btn flexbr">
                         <button id="editButton" onclick="enableInputs()">Edit</button>
                         <button id="saveButton" style="display: none;" onclick="saveInputs()">Save</button>
@@ -262,7 +276,10 @@
 
            <div class="resume"></div>
 
-        </div>
+
+           
+
+        </div>        <!-- middle right flexbox -->
 
         </div>  
 

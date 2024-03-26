@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel ="stylesheet" href="static/css/jobemployer.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    
 </head>
 <body>
@@ -24,8 +25,10 @@
     </nav>
 </div>
 <div class="middle flexbr">
-<!-- <H1> Welcome to this page</H1>
-    <span>{{us}}</span> -->
+    <div id="job-data" style="display: none;">
+       {{ job_data | tojson }}
+    </div>
+
 
     <div class="left">
         <div class="lbox"></div>
@@ -34,21 +37,56 @@
 
     <div class="mid flexbc">
         
-        <div class="mbox">
+        <div class="mbox flexbc">
+            <div class="btop flexbr">
+                <div class="bright flexbc"><span id="role">JAVA Developer - MNC Company, Chennai.</span>
+                <span id="compname">JTS Jobs Consultancy</span></div>
+                <div class="bleft flexbc"><div class="imgbox">
+                    <!-- <img src = "static/img/empdashboard/testimg.jpg"> -->
+                </div></div>
+            </div>
+            
+            <div class="bmid flexbc">
+                <div class="updata">
+                    <span><svg  width="16" height="16" fill="currentColor" class="bi bi-geo" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6M4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999zm2.493 8.574a.5.5 0 0 1-.411.575c-.712.118-1.28.295-1.655.493a1.3 1.3 0 0 0-.37.265.3.3 0 0 0-.057.09V14l.002.008.016.033a.6.6 0 0 0 .145.15c.165.13.435.27.813.395.751.25 1.82.414 3.024.414s2.273-.163 3.024-.414c.378-.126.648-.265.813-.395a.6.6 0 0 0 .146-.15l.015-.033L12 14v-.004a.3.3 0 0 0-.057-.09 1.3 1.3 0 0 0-.37-.264c-.376-.198-.943-.375-1.655-.493a.5.5 0 1 1 .164-.986c.77.127 1.452.328 1.957.594C12.5 13 13 13.4 13 14c0 .426-.26.752-.544.977-.29.228-.68.413-1.116.558-.878.293-2.059.465-3.34.465s-2.462-.172-3.34-.465c-.436-.145-.826-.33-1.116-.558C3.26 14.752 3 14.426 3 14c0-.599.5-1 .961-1.243.505-.266 1.187-.467 1.957-.594a.5.5 0 0 1 .575.411"/>
+                  </svg><span id="cityloc">location</span></span>
+
+                  <span>|<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
+                  </svg><span id="salary">salary</span></span>
+
+                  <span>|<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-briefcase" viewBox="0 0 16 16">
+                    <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5m1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0M1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5"/>
+                  </svg>
+                <span id="exp">1-3years</span></span>
+
+                </div>
+
+                <div class="description" id="jobdesc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quasi est blanditiis dolore consequuntur cupiditate minima accusamus doloribus temporibus rerum, aspernatur suscipit quod, tempora doloremque nobis? Assumenda modi aliquid dolores distinctio saepe non?</div>
+            </div>
+            <div class="bbottom flexbr">
+                <div><span id="timeago">2 Days-ago</span></div>
+
+                <div>
+                    
+                   
+                    <svg width="20" height="20" fill="currentColor" class="bi bi-bookmark-plus" viewBox="0 0 16 16">
+                    <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5V6H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V7H6a.5.5 0 0 1 0-1h1.5V4.5A.5.5 0 0 1 8 4"/>
+                  </svg>
+                
+             </div>
+                
+            </div>
 
         </div>
 
-        <div class="mbox">
+       
 
-        </div>
+        
 
-        <div class="mbox">
-
-        </div>
-
-        <div class="mbox">
-
-        </div>
+        
     </div>
     <div class="right">
         <div class="rbox"></div>
@@ -66,5 +104,8 @@
         
     </div>
     <div class="copyrt flexbr"><span>© 2024 carrier plus - All rights reserved.</span></div>
+    <script src="{{url_for('static', filename='js/jobemployer.js')}}">
+
+    </script>
 </body>
 </html>

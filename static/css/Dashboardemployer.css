@@ -76,11 +76,12 @@ body::-webkit-scrollbar {
     overflow: hidden;
     border-radius:0px 0px 10px 10px;
     z-index:10;
+    
     background-color: rgb(255, 255, 255);
     
 }
 
-/* nav .centernav{
+nav .centernav{
     text-decoration: none;
     font-size: 20px;
     margin:0px auto;
@@ -103,7 +104,7 @@ nav .centernav a{
     color: rgb(0, 0, 0);
     transition: color 0.3s, text-decoration 0.3s;
 
-} */
+}
 
 nav .logo{
     width:110px;
@@ -145,19 +146,6 @@ nav .left a:hover {
     
 }
 
-nav .left span{
-    text-decoration: none;
-    font-size: 20px;
-    /* font-weight: bold; */
-    margin: 0px 5px;
-    color: rgb(0, 0, 0);
-    padding: 4px 10px;
-    margin:0px 5px;
-    border-radius: 6px;
-    border:1px solid black;
-
-}
-
 nav .left .logo{
     text-decoration: none;
     font-size: 20px;
@@ -177,6 +165,19 @@ nav .left button{
     cursor: pointer;
     
     
+}
+
+nav .left span{
+    text-decoration: none;
+    font-size: 20px;
+    /* font-weight: bold; */
+    margin: 0px 5px;
+    color: rgb(0, 0, 0);
+    padding: 4px 10px;
+    margin:0px 5px;
+    border-radius: 6px;
+    border:1px solid black;
+
 }
 
 /* secssion1 hover and ani */
@@ -204,7 +205,7 @@ nav .left button:hover{
     height:auto;
     width:100vw;
     position:relative;
-    /* background-color: white; */
+    background-color: white;
     
     /* background-color: #16ba1f; */
     justify-content: flex-start;
@@ -220,6 +221,8 @@ nav .left button:hover{
     background-color: rgba(255, 255, 255, 0.907);
     justify-content: flex-start;
     align-items: flex-start;
+    position:sticky;
+    top:60px;
     
     
 
@@ -230,7 +233,7 @@ nav .left button:hover{
     top:0px;
    
     width:95%;
-    /* background-color: rgb(35, 35, 33); */
+    background-color: rgba(255, 255, 255, 0);
     margin:auto;
     margin-top:20px;
     justify-content: flex-start;
@@ -247,9 +250,95 @@ nav .left button:hover{
     position:relative;
     height:150px;
     width:90%;
-    background-color: rgb(150, 150, 59);
+    background-color: rgba(216, 244, 206, 0.625);
     border-radius: 10px;
     margin:auto;
+   justify-content: flex-start;
+   
+}
+
+.middle .midleft .box .prof .boxr{
+    position:relative;
+   
+    justify-content: flex-start;
+
+    height:100%;
+    width:35%;
+    /* background-color: rgba(37, 95, 16, 0.625); */
+   
+    
+}
+
+
+.middle .midleft .box .prof .boxr .imgbox{
+    position:relative;
+    margin:15px 0px;
+    height:55%;
+    width:90%;
+    background-color: rgba(181, 181, 181, 0.625);
+    border-radius: 50%;
+   
+    
+}
+
+.middle .midleft .box .prof .boxr .imgbox img{
+    position:relative;
+    height:100%;
+    width:100%;
+    border-radius: 50%;
+   
+    
+}
+
+
+
+.middle .midleft .box .prof .boxl{
+    position:relative;
+    height:100%;
+    width:65%;
+    /* background-color: rgba(10, 11, 10, 0.625); */
+   
+    
+}
+
+.middle .midleft .box .prof .boxl .userdata{
+    position:relative;
+    height:80%;
+    width:80%;
+    /* background-color: rgba(10, 11, 10, 0.625); */
+    gap:10px;
+    /* justify-content: flex-start; */
+    align-items: flex-start;
+    
+   
+    
+}
+
+.middle .midleft .box .prof .boxl .userdata >:nth-child(1){
+    position:relative;
+    font-size:24px;
+    color: rgb(74, 74, 74);
+    gap:5px;
+
+   
+    
+}
+
+.middle .midleft .box .prof .boxl .userdata >:nth-child(2){
+    position:relative;
+    font-size:18px;
+    color: rgb(37, 37, 37);
+ 
+}
+
+.middle .midleft .box .prof .boxl .userdata >:nth-child(3) button{
+    position:relative;
+    font-size:16px;
+    background-color: var(--butcolor);
+    padding:5px 10px;
+    border-radius: 10px;
+   cursor: pointer;
+ 
 }
 
 .middle .midleft .box .allsection{
@@ -269,14 +358,27 @@ nav .left button:hover{
     border-radius: 10px;
     height:40px;
     width:95%;
-    background-color: rgb(25, 184, 99);
+    background-color: rgba(230, 230, 230, 0.416);
     justify-content: flex-start;
     padding:0px 10px;
+    font-size: 20px;
+    border:1px solid rgba(184, 184, 184, 0.614);
+
+
+}
+/* all hover and animation */
+.middle .midleft .box .allsection button:hover{
+    
+    background-color: rgba(209, 232, 200, 0.416);
+    
+    border:1px solid rgba(184, 184, 184, 0.614);
 
 
 }
 
 
+
+/* for midright */
 
 .middle .midright{
     
@@ -284,16 +386,18 @@ nav .left button:hover{
     position:relative;
     height:auto;
     width:80%;
-    background-color: orange;
+    background: rgba(230, 230, 230, 0.636);
     justify-content: center;
     margin:auto;
 }
+
+/* profile section */
 
 .middle .midright .profile {
     
     height:auto;
     width:100%;
-    background: rgba(129, 49, 49, 0.715);
+    /* background: rgba(186, 186, 186, 0.514); */
     align-items: flex-start;
     position:relative;
     
@@ -304,29 +408,61 @@ nav .left button:hover{
 .middle .midright .box1{
     position:relative;
     height:auto;
-    width:97%;
-    background-color: rgb(47, 176, 99);
+    width:95%;
+    margin:auto;
+    /* background-color: rgb(47, 176, 99); */
     border-radius:20px;
-    margin-top:20px;
+    margin-top:15px;
+
 
 
 }
 
 .middle .midright .box1 .txt{
     font-size:40px;
-    padding:10px 40px;
+    padding:5px 40px;
     
 }
 
 .middle .midright .box1 .datasection{
-    border:1px solid black;
+    /* border:1px solid black; */
+    background-color: white;
     display: grid;
     height:auto;
     grid-template-columns: 50% 50%;
-    margin:30px 0px;
+    margin:20px 0px;
+    padding:40px 0px;
     justify-content: center;
+    border-radius: 20px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     
 }
+
+.middle .midright .box1 .datasection .gridspan2{
+   
+        grid-column: span 2; /* Spans across two columns */
+      
+   
+    
+}
+
+.middle .midright .box1 .datasection .fulllength{
+   position:relative;
+    width: 93%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #a6a6a6;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: rgba(207, 244, 206, 0.084);
+  
+
+
+}
+
+
+
 
 .middle .midright .box1 .datasection >:nth-child(n){
     margin:0px 80px;
@@ -346,10 +482,11 @@ select {
     width: 350px;
     padding: 10px;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #a6a6a6;
     border-radius: 5px;
     box-sizing: border-box;
     font-size: 16px;
+    background-color: rgba(207, 244, 206, 0.084);
 }
 
 /* for save and edit button */
@@ -362,7 +499,7 @@ select {
     
    
     padding: 10px 50px;
-    background-color: #007bff;
+    background-color: #15ff00a2;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -377,11 +514,11 @@ select {
 
 
 /* starting resume section */
-.middle .midright .resume {
+.middle .midright .Addjob {
     
-    height:600px;
+    height:auto;
     width:100%;
-    background: rgb(157, 157, 83);
+    /* background: rgba(186, 186, 186, 0.514); */
     align-items: flex-start;
     position:relative;
     
