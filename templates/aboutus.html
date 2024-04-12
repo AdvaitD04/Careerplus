@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Job Portal</title>
+  <style>
+    nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* background-image: linear-gradient(to bottom, #1d1c1c0a, #423d3d0c); */
+    padding: 19px;
+    position: sticky;
+    top: 0px;
+    height:4vh;
+    width:90%;
+    margin:auto;
+    overflow: hidden;
+    border-radius:0px 0px 10px 10px;
+    z-index:10;
+    background-color: rgb(255, 255, 255);
+    
+}
+
+nav .centernav{
+    text-decoration: none;
+    font-size: 20px;
+    margin:0px auto;
+    width:10vw;
+    color: rgb(0, 0, 0);
+    transition: color 0.3s, text-decoration 0.3s;
+    display: flex;
+    gap:30px;
+    
+    
+
+    
+}
+nav .centernav a{
+
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0px 5px;
+    color: rgb(255, 255, 255);
+    transition: color 0.3s, text-decoration 0.3s;
+
+}
+
+nav .logo{
+    width:110px;
+    height:70px;
+    position: relative;
+    top:-23px;
+    left:-6px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    z-index:100;
+}
+
+.logo img{
+    width:90%;
+    height:90%;
+    display: block;
+    overflow: hidden;
+    top:-10%;
+    
+
+}
+
+nav .left a{
+    text-decoration: none;
+    font-size: 20px;
+    /* font-weight: bold; */
+    margin: 0px 5px;
+    color: rgb(0, 0, 0);
+    
+    margin:0px 15px;
+}
+
+nav .left a:hover { 
+    color: #4d604a;
+    text-decoration: underline;
+    font-size: 21px;
+    transition: color 0.5s, text-decoration 0.3s;
+    
+}
+
+nav .left .logo{
+    text-decoration: none;
+    font-size: 20px;
+    margin: 0px 15px;
+    color: rgb(255, 255, 255);
+}
+
+nav .left button{
+    font-size: 20px;
+    padding: 4px 10px;
+    margin: 0px 8px;
+    background-color: var(--butcolor);
+    border-radius: 6px;
+    text-decoration: none;
+    box-shadow: none;
+    border: none;
+    cursor: pointer;
+    
+    
+}
+
+/* secssion1 hover and ani */
+nav .left button:hover{
+    font-size: 20px;
+    padding: 4px 10px;
+    margin: 0px 8px;
+    background-color: #2d9133;
+    border-radius: 6px;
+    text-decoration: none;
+    box-shadow: none;
+    border: none;
+    cursor: pointer;
+    transform:scale(1.1);
+    transition: background-color 0.5s;
+   
+    
+
+}
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5; /* Light gray background */
+      color: #333333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #ffffff; /* White container background */
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Drop shadow effect */
+    }
+
+    h1 {
+      color: #007700; /* Green color */
+    }
+
+    p {
+      line-height: 1.6;
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: #007700; /* Green color */
+    }
+  </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="static/img/logo.png">
+        </div>
+        <!-- <div class="centernav">
+            <a href="Home">Home</a>
+            <a href="#">About</a>
+            <a href="#">Help</a>
+            
+        </div> -->
+        <div class="left">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Help</a>
+            <a href="/login"><button>LogIn</button></a>
+           
+        </div>
+    </nav>
+  <div class="container">
+    <h1>About Us</h1>
+    <p>Welcome to our job portal! We are dedicated to connecting talented individuals with exciting job opportunities. Our mission is to simplify the job search process for both job seekers and employers.</p>
+    <p>At <span class="highlight">Job Portal</span>, we understand the challenges of finding the right job or the perfect candidate. That's why we've created a user-friendly platform that streamlines the hiring process.</p>
+    <p>Whether you're a job seeker looking for your dream job or an employer seeking top talent, we're here to help you succeed. Our team is committed to providing excellent service and support every step of the way.</p>
+    <p>Thank you for choosing <span class="highlight">Job Portal</span> for your job search or recruitment needs. We look forward to helping you achieve your goals!</p>
+  </div>
+</body>
+</html>
+

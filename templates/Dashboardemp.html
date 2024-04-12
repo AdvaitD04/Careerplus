@@ -20,7 +20,7 @@
     <div class="navbox">
         <nav>
             <div class="logo">
-                <img src="static/img/logo.png">
+                <a href="{{url_for('index')}}"><img src="static/img/logo.png"></a>
             </div>
 
             <div class="left">
@@ -28,7 +28,7 @@
                 <a href="#">About</a>
                 <a href="#">Help</a>
                 <!-- <a href="{{url_for('logout')}}"><button>LogOut</button></a> -->
-                <span>Employee</span>
+                <span>Jobseeker</span>
 
 
             </div>
@@ -40,7 +40,7 @@
                 <div class="prof flexbr">
                     <div class="boxr flexbc"><div class="imgbox"><img src = "static/img/empdashboard/testimg.jpg"></div></div>
                     <div class="boxl flexbc"><div class="userdata flexbc">
-                        <span class="flexbr">Employer
+                        <span class="flexbr">Jobseeker
                             <svg  width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
                       </svg>
@@ -52,13 +52,13 @@
                 </div>
                 <div class="allsection flexbc">
                     <button class="flexbr" onclick="toggleSection('profile')">Profile</button>
-                    <button class="flexbr">Resume</button>
+                    <!-- <button class="flexbr" onclick="toggleSection('resume')">Resume</button> -->
 
                     <button class="flexbr"><a href="{{url_for('jobemployer')}}" style="text-decoration: none; color:black ;">Find a job</a></button>
 
-                    <button class="flexbr" onclick="toggleSection('Bookmark')">Bookmark jobs</button>
+                    <!-- <button class="flexbr" onclick="toggleSection('Bookmark')">Bookmark jobs</button> -->
 
-                    <button class="flexbr" onclick="toggleSection('Applied')">Applied jobs</button>
+                    <!-- <button class="flexbr" onclick="toggleSection('Applied')">Applied jobs</button> -->
                     
                     <button class="flexbr"><a href="{{url_for('logout')}}" style="text-decoration: none; color:black ;">Logout</a></button>
 
@@ -281,8 +281,8 @@
 
             </div>
         
-
-           <div id ="Bookmark"class="resume" style="display: none;"></div>
+           <div id ="resume" class="resume" style="display: none;"></div>
+           <div id ="Bookmark" class="Bookmark" style="display: none;"></div>
            <div id ="Applied" class = "Appliedjob" style="display: none;"></div>
 
 

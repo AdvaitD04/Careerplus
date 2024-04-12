@@ -110,6 +110,22 @@ def signup():
   return render_template('signup.html')
 
 
+@app.route('/aboutus')
+def aboutus():
+    # if 'user' in session:
+        
+    #     return redirect(url_for('dashboard'))
+    return render_template('aboutus.html')
+
+
+@app.route('/contactus')
+def contactus():
+    # if 'user' in session:
+        
+    #     return redirect(url_for('dashboard'))
+    return render_template('contactus.html')
+
+
 
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
@@ -133,8 +149,7 @@ def data_all():
 
 @app.route('/jobemployer', methods=['GET', 'POST'])
 def jobemployer():
-    if 'user' not in session:
-        return redirect(url_for('loginuser'))
+    
     type = session['type']
 
     if type == "Employer":
@@ -181,6 +196,9 @@ def jobemployer():
 
        if 'jobId' in data:
         print(data)
+
+        if 'user' not in session:
+         return redirect(url_for('loginuser'))
         
         
         user_id = session.get('userid')
@@ -287,7 +305,9 @@ def fulljobs():
 
     # If the request method is not POST, render a template (GET request)
     jobid = request.args.get('jobid')
-    return render_template('fulljob.html', jobdata=jobid)
+    job_id = ObjectId(jobid)
+    jobdata = mongo.db.jobentries.find_one({"_id": job_id})
+    return render_template('fulljob.html', jobid=jobid,jobdata = jobdata)
 
 
 
@@ -370,11 +390,24 @@ def dashboardemployer():
     existing_data = mongo.db.jobentries.find({"user_id": user_id})
 
     print(user_id)
-
+    
+    entries = []
+    jobentries = []
+    i=1
     for document in existing_data:
      general_info = document.get("General_info", {})
      name = general_info.get("name", "N/A")
      company_name = general_info.get("companyname", "N/A")
+     jobCat = general_info.get("Categ", "N/A")
+
+     qualification_salary = document.get("qualification_salary", {})
+     job_salary = qualification_salary.get("name", "N/A")
+
+     job_location = document.get("location_more", {})
+     job_city = job_location.get("city", {})
+     job_deadline = job_location.get("job_deadline", {})
+
+     
     
      job_apply = document.get("jobApply", [])
     
@@ -383,6 +416,7 @@ def dashboardemployer():
         
         # Query MongoDB for user data using the extracted user_id
          user_data = mongo.db.profileemp.find_one({"user_id": userid})
+         i = i+1
          
         
         # Extract required fields from user data
@@ -391,6 +425,11 @@ def dashboardemployer():
              user_name = user_personal_info.get("name", "N/A")
              user_country = user_personal_info.get("country", "N/A")
              user_languages = user_personal_info.get("languages", "N/A")
+             user_languages = user_personal_info.get("languages", "N/A")
+             
+             
+             
+             
          else:
              user_name = "N/A"
              user_country = "N/A"
@@ -406,14 +445,28 @@ def dashboardemployer():
             "user_languages": user_languages,
             "jobApply": application  # Include the jobApply data
         }
-         print(entry)
+         
+         jobentry = {
+            "name": name,
+            "companyname": company_name,
+            "Category":jobCat,
+            "job_salary": job_salary,
+            "job_city": job_city,
+            "job_deadline":job_deadline,
+            "count":i
+        }
+         
+         entries.append(entry)
+       
+         jobentries.append(jobentry)
+    
          
         
     
     if data is None:
         data = {'personal_info': {'name': '', 'dob': '', 'gender': '', 'age': '', 'phone': '', 'country': '', 'qualification': '', 'experience': '', 'languages': '', 'salary_type': '', 'expected_salary': '', 'job_category': ''}}
     
-    return render_template('Dashboardemployer.html', data=data,uid=user_id,entry = entry)
+    return render_template('Dashboardemployer.html', data=data,uid=user_id,entries = entries,jobentries = jobentries)
   
 
 

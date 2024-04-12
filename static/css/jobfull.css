@@ -190,7 +190,7 @@ nav .left button:hover{
 }
 
 .middle .right{
-    background-color: #16ba1f;
+    /* background-color: #16ba1f; */
     width:70%;
     height:100vh;
     position: relative;
@@ -201,7 +201,7 @@ nav .left button:hover{
     position:relative;
     width:95%;
     height:350px;
-    background-color: yellow;
+    /* background-color: yellow; */
     margin-top:40px;
     
 }
@@ -210,7 +210,7 @@ nav .left button:hover{
     position:relative;
     width:90%;
     height:90%;
-    background-color: #292b29;
+    /* background-color: #848484; */
     border-radius: 20px;
 }
 
@@ -317,14 +317,14 @@ nav .left button:hover{
 
 .middle  .mbox .bmid >:nth-child(1) >:nth-child(n){
     position:relative;
-    background-color: yellow;
+    /* background-color: yellow; */
     font-size:20px;
     margin:0px 5px;
 }
 
 .middle  .mbox .bmid >:nth-child(1) >:nth-child(3){
     position:relative;
-    background-color: yellow;
+    /* background-color: yellow; */
     margin-top:10px;
 }
 

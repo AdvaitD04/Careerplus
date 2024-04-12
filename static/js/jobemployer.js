@@ -99,6 +99,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(datajob => {
             jobData = datajob;
             console.log('Received data:', datajob);
+           
             printJobData(jobData);
         })
 
@@ -151,6 +152,7 @@ function bookmark(jobId) {
 
     .then(responseData => {
         console.log('Bookmark data sent successfully:', responseData);
+        alert("Bookmark done");
         // it is optional
     })
 

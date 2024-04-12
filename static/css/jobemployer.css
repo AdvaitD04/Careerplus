@@ -118,13 +118,13 @@ nav .left a{
     font-size: 20px;
     /* font-weight: bold; */
     margin: 0px 5px;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     
     margin:0px 15px;
 }
 
 nav .left a:hover { 
-    color: #030303;
+    color: #4d604a;
     text-decoration: underline;
     font-size: 21px;
     transition: color 0.5s, text-decoration 0.3s;
@@ -189,7 +189,7 @@ nav .left button:hover{
     position:relative;
     width:20%;
     height:100vh;
-    background-color: yellow;
+    /* background-color: rgba(207, 207, 207, 0.356); */
 }
 
 .middle .left .lbox{
@@ -199,8 +199,9 @@ nav .left button:hover{
     width:min(300px,96%);
     margin:10px auto;
     height: 80vh;
-    background-color: white;
-    border-radius:20px;
+    
+    background-color: rgb(255, 255, 255);
+    border-radius:10px;
     justify-content: center;
     gap:10px;
     
@@ -208,11 +209,11 @@ nav .left button:hover{
 
 .middle .left .lbox .toplbox{ 
     position:relative;
-    background-color: rgb(65, 65, 63);
+    /* background-color: rgb(65, 65, 63); */
     height: 10%;
     width:90%;
-    color:white;
-    font-size: large;
+    color:rgb(87, 197, 83);
+    font-size: 28px;
     justify-content: flex-start;
 
     
@@ -221,14 +222,62 @@ nav .left button:hover{
 }
 
 
+
+
 .middle .left .lbox .bottomlbox{ 
     position:relative;
-    background-color: rgb(51, 51, 48);
+    
+    background-color: rgba(213, 253, 213, 0.407);
     height: 90%;
     width:90%;
+    border-radius: 10px;
+    gap:5px;
+    justify-content: flex-start;
+    
+}
+
+.middle .left .lbox .bottomlbox .tag{ 
+    position:relative;
+    background-color: rgb(223, 223, 223);
+    height: auto;
+    width:100%;
+    border-radius: 10px;
+    padding:10px 0px;
 
     
 }
+.middle .left .lbox .bottomlbox .tag >:nth-child(1){ 
+
+    position:relative;
+    
+    /* padding:4px 0px; */
+    width:95%;
+    border-radius: 3px;
+    margin:5px;
+    align-items: flex-start;
+    font-size: 20px;
+   
+
+    
+}
+
+.middle .left .lbox .bottomlbox .tag >:nth-child(2){ 
+
+    position:relative;
+    /* background-color: rgba(151, 151, 151, 0.407); */
+    padding:4px 0px;
+    width:95%;
+    border-radius: 3px;
+    margin:5px;
+    align-items: flex-start;
+   
+
+    
+}
+
+
+
+
 
 .middle .mid{
     display:flex;
@@ -244,6 +293,7 @@ nav .left button:hover{
     margin:10px auto;
     height: 230px;
     background-color: rgb(255, 255, 255);
+    
     border-radius:20px;
     gap:5px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -268,7 +318,7 @@ nav .left button:hover{
 }
 
 .middle .mid .mbox .btop .bright >:nth-child(1) {
-   font-size:20px;
+    font-size: 24px;
    color:rgb(59, 59, 59);
    overflow: hidden; 
     text-overflow: ellipsis; 
@@ -397,7 +447,7 @@ nav .left button:hover{
     position:relative;
     width:20%;
     height:100vh;
-    background-color: yellow;
+    /* background-color: yellow; */
 }
 
 .middle .right .rbox{

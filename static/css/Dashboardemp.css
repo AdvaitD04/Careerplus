@@ -499,6 +499,16 @@ select {
     
     
 }
+.middle .midright .Bookmark {
+    
+    height:700px;
+    width:100%;
+    background: rgb(80, 80, 75);
+    align-items: flex-start;
+    position:relative;
+    
+    
+}
 
 .middle .midright .Appliedjob {
     

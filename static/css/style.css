@@ -274,6 +274,7 @@ nav .left button:hover{
     font-size: 19px;
     font-weight: 700;
     color:var(--butcolor);
+    text-decoration: none;
 }
 
 .center .right .boxright> :nth-child(3):hover{
@@ -288,7 +289,11 @@ nav .left button:hover{
     font-weight: 700;
     color:rgb(10, 18, 8);
     transition: background-color 0.5s;
+    justify-content: center;
+    
 }
+
+
 
 
 .search  {
@@ -554,6 +559,7 @@ nav .left button:hover{
     gap:15px;
     box-shadow: 0px -25px 20px -20px rgba(0, 0, 0, 0.45);
     color:rgb(0, 0, 0);
+    text-decoration: none;
     
     
     
@@ -980,14 +986,47 @@ align-items: flex-start;
     justify-content: center;
     align-items: center;
     gap:20px;
+    text-decoration: none;
     
+    cursor: pointer;
 
 }
+
+
+.footer .box .p >:nth-child(n){
+    font-weight:bold;
+    color:rgb(85, 85, 85);
+
+ }
+
+ .footer .box .p >:nth-child(n):hover{
+    
+    color:rgb(69, 186, 45);
+ }
+
+
 
 .footer .box .p >:nth-child(1){
-   font-size:20px;
-   font-weight:bold;
+   font-size:24px;
+   font-weight:bolder;
+   color:rgb(102, 113, 102);
 }
+
+.footer .box .p >:nth-child(n) a{
+    
+    color:rgb(85, 85, 85);
+ }
+
+ .footer .box .p >:nth-child(n) a:hover{
+    
+    color:rgb(69, 186, 45);
+ }
+
+ .footer .box .p >:nth-child(n) a:active{
+    
+    color:rgb(135, 25, 32);
+ }
+
 
 .footer .box .p1 img{
    width:200px;
