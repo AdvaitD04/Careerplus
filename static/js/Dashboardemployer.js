@@ -2,6 +2,18 @@
 var currentDate = new Date();
 var form = document.querySelector('.datasection');
 
+function toggleSection(sectionId) {
+    const allSections = document.querySelectorAll('.midright > div'); // Select all sections
+    allSections.forEach(section => {
+        if (section.id === sectionId) {
+            section.style.display = 'flex'; // Show the selected section
+        } else {
+            section.style.display = 'none'; // Hide other sections
+        }
+    });
+}
+
+
 // Get all input and select elements within the form
 var inputs = form.querySelectorAll('input, select');
 
@@ -184,3 +196,5 @@ if (daysDiff === 0) {
 }
 
 // fetching all necessary data 
+
+

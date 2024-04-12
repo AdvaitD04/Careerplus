@@ -5,6 +5,17 @@ var form = document.querySelector('.datasection');
 // Get all input and select elements within the form
 var inputs = form.querySelectorAll('input, select');
 
+function toggleSection(sectionId) {
+    const allSections = document.querySelectorAll('.midright > div'); // Select all sections
+    allSections.forEach(section => {
+        if (section.id === sectionId) {
+            section.style.display = 'flex'; // Show the selected section
+        } else {
+            section.style.display = 'none'; // Hide other sections
+        }
+    });
+}
+
 // Loop through each input element and set the disabled attribute
 for (var i = 0; i < inputs.length; i++) {
     inputs[i].disabled = true;
@@ -32,10 +43,7 @@ function enableInputs() {
 
 
 
-function showprofile() {
-    var profile = document.querySelector('.profile');
-    profile.style.display = "none";
-}
+
 
 //taking data input
 function saveInputs() {

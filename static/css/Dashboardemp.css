@@ -491,7 +491,7 @@ select {
 /* starting resume section */
 .middle .midright .resume {
     
-    height:600px;
+    height:700px;
     width:100%;
     background: rgb(157, 157, 83);
     align-items: flex-start;
@@ -499,6 +499,19 @@ select {
     
     
 }
+
+.middle .midright .Appliedjob {
+    
+    height:700px;
+    width:100%;
+    background: rgb(36, 143, 54);
+    align-items: flex-start;
+    position:relative;
+    
+    
+}
+
+
 
 
 

@@ -40,6 +40,8 @@ def loginuser():
                 session['loginuser'] = True
                 session['user'] = str(user['_id'])
                 session['userid'] = user['userid']
+                session['type'] = user['type']
+                
                 use = session['userid']
                 type = user['type']
                 if type == "Employee":
@@ -129,24 +131,168 @@ def data_all():
     profiles = list(mongo.db.profile.find({}))  # Exclude _id field from response
     return render_template('dataall.html', profiles=profiles)
 
-@app.route('/jobemployer')
+@app.route('/jobemployer', methods=['GET', 'POST'])
 def jobemployer():
     if 'user' not in session:
         return redirect(url_for('loginuser'))
-    
-    # Query MongoDB for job data (e.g., retrieve 10 job entries)
-    job_entries = mongo.db.jobentries.find().limit(10)
+    type = session['type']
 
-    # Convert MongoDB cursor to a list of dictionaries
+    if type == "Employer":
+        return redirect(url_for('dashboardemployer')) 
+
+    
+    if request.method == 'POST':
+
+       data = request.json 
+       if 'locations' in data:
+        # Retrieve filter parameters from the request
+        locations = request.json.get('locations')
+        min_salary = request.json.get('min_salary')
+        max_salary = request.json.get('max_salary')
+        
+        # Add more filters as needed
+
+        # Construct query based on filters
+        query = {}
+        
+        if locations:
+            query['location_more.city'] = {'$in': locations}
+            
+        if min_salary:
+            query['salary'] = {'$gte': float(min_salary)}
+        if max_salary:
+            query['salary']['$lte'] = float(max_salary)
+        
+        
+        # Query MongoDB for job data based on filters
+        job_entries = mongo.db.jobentries.find(query).limit(10)
+
+        # Convert MongoDB cursor to a list of dictionaries
+        job_data = [entry for entry in job_entries]
+
+        
+        for job in job_data:
+         job['_id'] = str(job['_id'])
+
+       
+        return jsonify(job_data)
+       
+       # for job bookmark using id of job
+
+       if 'jobId' in data:
+        print(data)
+        
+        
+        user_id = session.get('userid')
+        
+        existing_data = mongo.db.profileemp.find_one({"user_id": user_id})
+        if existing_data:
+            # Check if 'jobApply' exists in existing_data
+            if 'Bookmark' in existing_data:
+                # Check if the jobId already exists in jobApply
+                exists = mongo.db.profileemp.find_one({"user_id": user_id, "Bookmark": {"$elemMatch": {"jobId": data["jobId"]}}})
+                if exists:
+                    return jsonify({"message": "Data already exists"}), 200
+                else:
+                    # Append data to 'jobApply'
+                    mongo.db.profileemp.update_one({"user_id": user_id}, {"$push": {"Bookmark": {"jobId":data["jobId"]}}})
+            else:
+                # Create 'jobApply' object if it doesn't exist
+                mongo.db.profileemp.update_one({"user_id": user_id}, {"$set": {"Bookmark": {"jobId":[data["jobId"]]}}})
+        else:
+            # If user_id doesn't exist, create a new document
+            mongo.db.profileemp.insert_one({"user_id": user_id, "Bookmark": {"jobId":[data["jobId"]]}})
+
+        print("Received data:", data["jobId"])
+        return jsonify({"message": "Data received successfully"}), 200
+
+        
+
+    # If it's a GET request, proceed with the existing logic to render the template with all job data
+    job_entries = mongo.db.jobentries.find().limit(10)
     job_data = [entry for entry in job_entries]
 
-    # Remove _id field from each document
-    for job in job_data:
-        job.pop('_id', None)
 
-    # Render the template with job data
+
+    
+    
+    for job in job_data:
+        job['_id'] = str(job['_id'])
     us = session['userid']
     return render_template('jobemployer.html', job_data=job_data, us=us)
+
+
+
+@app.route('/jobdata', methods=['GET', 'POST'])
+def fulljobs():
+    if 'user' not in session:
+        return redirect(url_for('loginuser'))
+    type = session['type']
+
+    if type == "Employer":
+        return redirect(url_for('dashboardemployer'))    
+    
+    if request.method == 'POST':
+        if type == "Employer":
+         return redirect(url_for('dashboardemployer'))   
+        # Retrieve the JSON data from the request
+        data = request.json
+        user_id = session.get('userid')
+        # Update the data for the user ID if it already exists, otherwise insert new data
+        existing_data = mongo.db.profileemp.find_one({"user_id": user_id})
+        if existing_data:
+            # Check if 'jobApply' exists in existing_data
+            if 'jobApply' in existing_data:
+                # Check if the jobId already exists in jobApply
+                exists = mongo.db.profileemp.find_one({"user_id": user_id, "jobApply": {"$elemMatch": {"jobId": data["jobId"]}}})
+                
+                if exists:
+                    return jsonify({"message": "Data already exists"}), 200
+                else:
+                    # Append data to 'jobApply'
+                    mongo.db.profileemp.update_one({"user_id": user_id}, {"$push": {"jobApply": data}})
+            else:
+                # Create 'jobApply' object if it doesn't exist
+                mongo.db.profileemp.update_one({"user_id": user_id}, {"$set": {"jobApply": [data]}})
+        else:
+            # If user_id doesn't exist, create a new document
+            mongo.db.profileemp.insert_one({"user_id": user_id, "jobApply": [data]})
+        #   for adding same in job entries
+        
+        job_id = ObjectId(data["jobId"])
+        existing_data_jobentries = mongo.db.jobentries.find_one({"_id": job_id})
+        print(existing_data_jobentries)
+        if existing_data_jobentries:
+            data["userid"] = user_id
+            # Check if 'jobApply' exists in existing_data
+            if 'jobApply' in existing_data_jobentries:
+                # Check if the jobId already exists in jobApply
+                exists = mongo.db.jobentries.find_one({"_id": job_id, "jobApply": {"$elemMatch": {"userid": user_id}}})
+
+                
+                if exists:
+                    return jsonify({"message": "Data already exists"}), 200
+                else:
+                    # Append data to 'jobApply'
+                    mongo.db.jobentries.update_one({"_id": job_id}, {"$push": {"jobApply": data}})
+            else:
+                # Create 'jobApply' object if it doesn't exist
+                mongo.db.jobentries.update_one({"_id": job_id}, {"$set": {"jobApply": [data]}})
+        else:
+            # If user_id doesn't exist, create a new document
+            mongo.db.jobentries.insert_one({"_id": job_id, "jobApply": [data]})    
+
+        print("Received data:", data)
+        return jsonify({"message": "Data received successfully"}), 200
+
+    # If the request method is not POST, render a template (GET request)
+    jobid = request.args.get('jobid')
+    return render_template('fulljob.html', jobdata=jobid)
+
+
+
+
+
 
 #  for dashboard by user
 @app.route('/Dashboardemp', methods=['GET', 'POST'])
@@ -195,6 +341,7 @@ def dashboardemployer():
         if 'personal_info' in data: 
         # Update the data for the user ID if it already exists, otherwise insert new data
          existing_data = mongo.db.profileemployer.find_one({"user_id": user_id})
+         
          if existing_data:
                mongo.db.profileemployer.update_one({"user_id": user_id}, {"$set": {"personal_info": data['personal_info']}}, upsert=True)
         
@@ -210,15 +357,63 @@ def dashboardemployer():
             data['user_id'] = user_id
             mongo.db.jobentries.insert_one(data)
 
+        if 'sent_info' in data:
+            existing_data = mongo.db.profileemployer.find({"user_id": user_id})
+            print(existing_data)
+                
+
 
     
     user_id = session.get('userid')
     data = mongo.db.profileemployer.find_one({"user_id": user_id})
     
+    existing_data = mongo.db.jobentries.find({"user_id": user_id})
+
+    print(user_id)
+
+    for document in existing_data:
+     general_info = document.get("General_info", {})
+     name = general_info.get("name", "N/A")
+     company_name = general_info.get("companyname", "N/A")
+    
+     job_apply = document.get("jobApply", [])
+    
+     for application in job_apply:
+         userid = application.get("userid")
+        
+        # Query MongoDB for user data using the extracted user_id
+         user_data = mongo.db.profileemp.find_one({"user_id": userid})
+         
+        
+        # Extract required fields from user data
+         if user_data:
+             user_personal_info = user_data.get("personal_info", {})
+             user_name = user_personal_info.get("name", "N/A")
+             user_country = user_personal_info.get("country", "N/A")
+             user_languages = user_personal_info.get("languages", "N/A")
+         else:
+             user_name = "N/A"
+             user_country = "N/A"
+             user_languages = "N/A"
+        
+        # Append data to output_data list
+         entry = {
+            "name": name,
+            "companyname": company_name,
+            "userid": userid,
+            "user_name": user_name,
+            "user_country": user_country,
+            "user_languages": user_languages,
+            "jobApply": application  # Include the jobApply data
+        }
+         print(entry)
+         
+        
+    
     if data is None:
         data = {'personal_info': {'name': '', 'dob': '', 'gender': '', 'age': '', 'phone': '', 'country': '', 'qualification': '', 'experience': '', 'languages': '', 'salary_type': '', 'expected_salary': '', 'job_category': ''}}
     
-    return render_template('Dashboardemployer.html', data=data,uid=user_id)
+    return render_template('Dashboardemployer.html', data=data,uid=user_id,entry = entry)
   
 
 

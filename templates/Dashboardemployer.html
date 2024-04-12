@@ -50,9 +50,10 @@
                 </div>
                 </div>
                 <div class="allsection flexbc">
-                    <button class="flexbr" onclick ="showprofile()">Profile</button>
-                    <button class="flexbr">Post Job</button>
-                    <button class="flexbr">View Jobs</button>
+                    <button class="flexbr" onclick="toggleSection('profile')">Profile</button>
+                    <button class="flexbr" onclick="toggleSection('postJob')">Post Job</button>
+                    <button class="flexbr" onclick="toggleSection('jobposts')">View Jobs</button>
+                    <button class="flexbr" onclick="toggleSection('jobinbox'), drawdata()">job application</button>
                     <button class="flexbr">logout</button>
 
                 </div>
@@ -60,7 +61,7 @@
         </div>
         <div class="midright flexbc">
             
-            <div class="profile flexbc">
+            <div id="profile" class="profile flexbc">
                 <div class="box1">
                     <div class="txt">Profile</div>
 
@@ -180,7 +181,7 @@
             </div>  <!--profile section complete-->
 
 
-            <div class="Addjob flexbc">
+            <div id="postJob" class="Addjob flexbc" style="display: none;">
                 <div class="box1">
                     <div class="txt">Submit Jobs</div>
                     <form class="datasection">
@@ -421,6 +422,70 @@
     
                     
                 </div>
+
+                <div id="jobposts" class="jobposts flexbc" style="display: none;">
+                    <div class="box1">
+                        <div class="txt">My Job Post</div>
+    
+    
+                        <form class="datasection">
+                            <div>
+                                <label for="compname">Company name:</label>
+                                <input type="text" id="compname" name="compname" value="{{ data.personal_info.name | default('') }}" required readonly>
+                            </div>
+                           
+                            
+    
+                        </form>
+                        <!-- Additional fields from provided code -->
+                        <div class="btn flexbr">
+                            <button id="editButton" onclick="enableInputs()">Edit</button>
+                            <button id="saveButton" style="display: none;" onclick="saveInputs()">Save</button>
+                            
+                        </div>
+    
+                    </div>   
+    
+                </div>
+
+                <div id="jobinbox" class="jobinbox" style="display:none">
+                    <div class="box1">
+                        <div class="txt">Job Application</div>
+                
+                        {% for entry in data %}
+                        <div class="jobdatasection flexbc">
+                            <div class="topjob">
+                                {{ entry.name }}
+                            </div>
+                            <div class="midjob">
+                                <div>{{ entry.user_name }}</div>
+                                <div>{{ entry.user_country }}</div>
+                                <div>
+                                    Language preferred: {{ entry.user_languages }}
+                                </div>
+                            </div>
+                            <div class="bottomjob flexbr">
+                                <div>Status of Application: </div>
+                                <div class="flexbr">
+                                    <div class="flexb">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16">
+                                            <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5"/>
+                                            <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                                        </svg>
+                                    </div>
+                                    <div>Add Data</div>
+                                    <div>Delete</div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+                
+                        <!-- Additional fields from provided code -->
+                
+                    </div> 
+                </div>
+                
                 
 
 
@@ -430,6 +495,8 @@
            
 
         </div>
+
+        
 
         </div>  
 

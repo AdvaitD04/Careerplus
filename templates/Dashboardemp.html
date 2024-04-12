@@ -51,17 +51,25 @@
                 </div>
                 </div>
                 <div class="allsection flexbc">
-                    <button class="flexbr" onclick ="showprofile()">Profile</button>
+                    <button class="flexbr" onclick="toggleSection('profile')">Profile</button>
                     <button class="flexbr">Resume</button>
+
                     <button class="flexbr"><a href="{{url_for('jobemployer')}}" style="text-decoration: none; color:black ;">Find a job</a></button>
+
+                    <button class="flexbr" onclick="toggleSection('Bookmark')">Bookmark jobs</button>
+
+                    <button class="flexbr" onclick="toggleSection('Applied')">Applied jobs</button>
+                    
                     <button class="flexbr"><a href="{{url_for('logout')}}" style="text-decoration: none; color:black ;">Logout</a></button>
+
+                    
 
                 </div>
             </div>
         </div>
         <div class="midright flexbc">
             
-            <div class="profile flexbc">
+            <div id="profile" class="profile flexbc">
                 <div class="box1">
                     <div class="txt">Profile</div>
 
@@ -274,7 +282,8 @@
             </div>
         
 
-           <div class="resume"></div>
+           <div id ="Bookmark"class="resume" style="display: none;"></div>
+           <div id ="Applied" class = "Appliedjob" style="display: none;"></div>
 
 
            
