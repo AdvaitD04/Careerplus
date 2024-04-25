@@ -56,9 +56,9 @@
 
                     <button class="flexbr"><a href="{{url_for('jobemployer')}}" style="text-decoration: none; color:black ;">Find a job</a></button>
 
-                    <!-- <button class="flexbr" onclick="toggleSection('Bookmark')">Bookmark jobs</button> -->
+                    <button class="flexbr" onclick="toggleSection('Bookmark')">Bookmark jobs</button>
 
-                    <!-- <button class="flexbr" onclick="toggleSection('Applied')">Applied jobs</button> -->
+                    <button class="flexbr" onclick="toggleSection('Applied')">Applied jobs</button>
                     
                     <button class="flexbr"><a href="{{url_for('logout')}}" style="text-decoration: none; color:black ;">Logout</a></button>
 
@@ -187,7 +187,7 @@
                 </div>
 
 
-                <div class="box1 profile">
+                <div class="box1 profile" style="display: none;">
                     <div class="txt">Job info</div>
 
 
@@ -214,7 +214,7 @@
                                 <option value="18-25">18-25</option>
                                 <option value="25-30">25-30</option>
                                 <option value="30-35">30-35</option>
-                                <!-- Add more age ranges as needed -->
+                                
                             </select>
                         </div>
 
@@ -281,9 +281,124 @@
 
             </div>
         
-           <div id ="resume" class="resume" style="display: none;"></div>
-           <div id ="Bookmark" class="Bookmark" style="display: none;"></div>
-           <div id ="Applied" class = "Appliedjob" style="display: none;"></div>
+           <div id ="resume" class="resume flexbc" style="display: none;">
+            <div class="box1">
+                <div class="txt">Profile</div>
+
+                <div class="datasectionresum" id="form">
+                    <label for="images" class="drop-container" id="dropcontainer">
+                        <span class="drop-title">Drop files here</span>
+                        or
+                        <input class="inputfile" type="file" id="resumedata" accept=".pdf" required>
+                      </label>
+                      
+
+                </div>
+                <div class="upresume">
+
+                    <button>Upload Data</button>
+                    
+                </div>
+                
+                </div>
+
+                
+    </div>
+           <div id ="Bookmark" class="Bookmark" style="display: none;">
+            <div class="box1">
+                <div class="txt">Bookmark</div>
+                <div class="jobdatasection flexbc">
+                    <div class="topjob">
+                        Jobname:Design engineer
+                    </div>
+                    <div class="midjob flexbc">
+                        <div>tag:system designer job</div>
+                        <div>City:Banglore </div>
+                        <div>
+                            Job Deadline: 2024-03-28
+                        </div>
+                    </div>
+                    <div class="bottomjob flexbr">
+                        <div></div>
+                        <div class="flexbr">
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="jobdatasection flexbc">
+                    <div class="topjob">
+                        Jobname:video editor
+                    </div>
+                    <div class="midjob flexbc">
+                        <div>tag:personal video editor</div>
+                        <div>City:Hyderabad </div>
+                        <div>
+                            Job Deadline: 2024-03-28
+                        </div>
+                    </div>
+                    <div class="bottomjob flexbr">
+                        <div></div>
+                        <div class="flexbr">
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                
+                </div>
+        
+        </div>
+           <div id ="Applied" class = "Appliedjob" style="display: none;">
+            <div class="box1">
+                <div class="txt">Jobs Applied</div>
+                <div class="jobdatasection flexbc">
+                    <div class="topjob">
+                        Jobname:Design engineer
+                    </div>
+                    <div class="midjob flexbc">
+                        <div>tag:system designer job</div>
+                        <div>City:Banglore </div>
+                        <div>
+                            Job Deadline: 2024-03-28
+                        </div>
+                    </div>
+                    <div class="bottomjob flexbr">
+                        <div></div>
+                        <div class="flexbr">
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="jobdatasection flexbc">
+                    <div class="topjob">
+                        Jobname:video editor
+                    </div>
+                    <div class="midjob flexbc">
+                        <div>tag:personal video editor</div>
+                        <div>City:Hyderabad </div>
+                        <div>
+                            Job Deadline: 2024-03-28
+                        </div>
+                    </div>
+                    <div class="bottomjob flexbr">
+                        <div></div>
+                        <div class="flexbr">
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                
+                </div>       
+        </div>
 
 
            

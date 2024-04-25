@@ -102,7 +102,7 @@ def signup():
                 flash('Confirm password and Password dont match', 'error')
                 return redirect(url_for('signup'))
 
-            return redirect(url_for('jobemployer', us = userid))
+            return redirect(url_for('jobemployer',us = userid))
         except Exception as e:
             print(f"An error occurred: {str(e)}")
             return "An error occurred while registering. Please try again."
@@ -150,10 +150,11 @@ def data_all():
 @app.route('/jobemployer', methods=['GET', 'POST'])
 def jobemployer():
     
-    type = session['type']
+    if 'user' in session:
+     type = session['type']
 
-    if type == "Employer":
-        return redirect(url_for('dashboardemployer')) 
+     if type == "Employer":
+         return redirect(url_for('dashboardemployer')) 
 
     
     if request.method == 'POST':
@@ -162,7 +163,9 @@ def jobemployer():
        if 'locations' in data:
         # Retrieve filter parameters from the request
         locations = request.json.get('locations')
-        min_salary = request.json.get('min_salary')
+        # print(locations)
+        salary = request.json.get('salaries')
+        print(salary)
         max_salary = request.json.get('max_salary')
         
         # Add more filters as needed
@@ -173,17 +176,20 @@ def jobemployer():
         if locations:
             query['location_more.city'] = {'$in': locations}
             
-        if min_salary:
-            query['salary'] = {'$gte': float(min_salary)}
+        if salary:
+            query['qualification_salary.salary_range'] = {'$in': salary}
         if max_salary:
             query['salary']['$lte'] = float(max_salary)
+        # print(query)    
         
         
         # Query MongoDB for job data based on filters
         job_entries = mongo.db.jobentries.find(query).limit(10)
+        
 
         # Convert MongoDB cursor to a list of dictionaries
         job_data = [entry for entry in job_entries]
+        # print(job_data)
 
         
         for job in job_data:
@@ -236,8 +242,8 @@ def jobemployer():
     
     for job in job_data:
         job['_id'] = str(job['_id'])
-    us = session['userid']
-    return render_template('jobemployer.html', job_data=job_data, us=us)
+    
+    return render_template('jobemployer.html', job_data=job_data)
 
 
 
@@ -260,6 +266,7 @@ def fulljobs():
         existing_data = mongo.db.profileemp.find_one({"user_id": user_id})
         if existing_data:
             # Check if 'jobApply' exists in existing_data
+            
             if 'jobApply' in existing_data:
                 # Check if the jobId already exists in jobApply
                 exists = mongo.db.profileemp.find_one({"user_id": user_id, "jobApply": {"$elemMatch": {"jobId": data["jobId"]}}})
@@ -324,18 +331,19 @@ def dashboardemp():
         # Retrieve the JSON data from the request
         data = request.json
         user_id = session.get('userid')
+        if 'personal_info' in data:
         # Update the data for the user ID if it already exists, otherwise insert new data
-        existing_data = mongo.db.profileemp.find_one({"user_id": user_id})
-        if existing_data:
-              mongo.db.profileemp.update_one({"user_id": user_id}, {"$set": {"personal_info": data['personal_info']}}, upsert=True)
+         existing_data = mongo.db.profileemp.find_one({"user_id": user_id})
+         if existing_data:
+               mongo.db.profileemp.update_one({"user_id": user_id}, {"$set": {"personal_info": data['personal_info']}}, upsert=True)
         
         
-        else:
-            data['user_id'] = user_id
-            mongo.db.profileemp.insert_one(data)
+         else:
+             data['user_id'] = user_id
+             mongo.db.profileemp.insert_one(data)
         
-        print("Received data:", data)
-        return jsonify({"message": "Data received successfully"}), 200
+         print("Received data:", data)
+         return jsonify({"message": "Data received successfully"}), 200
 
     # If it's a GET request or if the POST request doesn't have JSON data
     # Retrieve the existing data for the user ID
@@ -344,6 +352,18 @@ def dashboardemp():
     
     if data is None:
         data = {'personal_info': {'name': '', 'dob': '', 'gender': '', 'age': '', 'phone': '', 'country': '', 'qualification': '', 'experience': '', 'languages': '', 'salary_type': '', 'expected_salary': '', 'job_category': ''}}
+
+    if 'resumeData' in data:
+        existing_data = mongo.db.profileemp.find_one({"user_id": user_id})
+        if existing_data:
+               mongo.db.profileemp.update_one({"user_id": user_id}, {"$set": {"resume": data['resumeData']}}, upsert=True)
+               print("Received data:", data)
+               return jsonify({"message": "Data received successfully"}), 200
+    
+    
+    user_id = session.get('userid')
+    data = mongo.db.profileemp.find_one({"user_id": user_id})    
+
     
     return render_template('Dashboardemp.html', data=data,uid=user_id)
 
@@ -378,8 +398,41 @@ def dashboardemployer():
             mongo.db.jobentries.insert_one(data)
 
         if 'sent_info' in data:
-            existing_data = mongo.db.profileemployer.find({"user_id": user_id})
+            existing_data = mongo.db.jobentries.find({"user_id": user_id})
             print(existing_data)
+
+        if 'id' in data:
+         job_id = ObjectId(data['id'])  # Convert id to ObjectId
+         print(data['userid'])
+         userid1 = data['userid']
+
+    # Update the status of the matched entry to "accepted" directly in the database
+         result = mongo.db.jobentries.update_one(
+          {"_id": job_id, "jobApply.userid": userid1},  # Match the document with the specified _id and userid in jobApply
+          {"$set": {"jobApply.$.status": "accepted"}}  # Update the status field in the matched array element
+          )
+         
+         
+         
+         result1 = mongo.db.profileemp.update_one(
+    {"user_id": userid1, "jobApply.jobId": data['id']},
+    {"$set": {"jobApply.$.status": "accepted"}}
+)
+         
+         
+         if result1.matched_count == 1:
+        # Check if the update was successful
+           print("found for jobapply")
+         else:
+           print("no match")  
+          
+         if result.matched_count == 1:
+        # Check if the update was successful
+           return jsonify({"message": "Status updated successfully."}), 200
+         else:
+          return jsonify({"message": "No matching document found or status already updated."}), 404
+            
+                 
                 
 
 
@@ -395,6 +448,7 @@ def dashboardemployer():
     jobentries = []
     i=1
     for document in existing_data:
+     
      general_info = document.get("General_info", {})
      name = general_info.get("name", "N/A")
      company_name = general_info.get("companyname", "N/A")
@@ -437,6 +491,7 @@ def dashboardemployer():
         
         # Append data to output_data list
          entry = {
+            "id": str(document['_id']),
             "name": name,
             "companyname": company_name,
             "userid": userid,
@@ -447,6 +502,7 @@ def dashboardemployer():
         }
          
          jobentry = {
+            
             "name": name,
             "companyname": company_name,
             "Category":jobCat,

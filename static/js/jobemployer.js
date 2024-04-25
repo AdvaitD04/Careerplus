@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+    var count =0;
     var jobDataElement = document.getElementById("job-data");
     var jobDataString = jobDataElement.textContent.trim();
     var jobData = JSON.parse(jobDataString);
@@ -18,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
         clonedElements = [];
 
         if (jobData.length > 0) {
-            for (var i = 0; i < jobData.length; i++) {
+            for (var i = jobData.length-1; i >= 0; i--) {
                 var nowDate = new Date();
                 var clonedElement = originalElement.cloneNode(true);
                 clonedElement.querySelector("#role").innerText = jobData[i].General_info.name;
@@ -72,17 +73,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 // Add cloned element to the array
                 clonedElements.push(clonedElement);
-
+                document.getElementById("nodata").style.display = "none";
                 
             }
         }
+        else {
+            document.getElementById("nodata").style.display = "flex";
+
+        }
     }
 
-    function fetchJobsByLocation(locations) {
-        const filters = {
-            locations:locations
-        };
-        
+    
+
+    function fetchJobs(filters) {
         fetch('/jobemployer', {
             method: 'POST',
             headers: {
@@ -99,28 +102,59 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(datajob => {
             jobData = datajob;
             console.log('Received data:', datajob);
-           
             printJobData(jobData);
         })
-
         .catch(error => {
             console.error('Error fetching job listings:', error);
         });
     }
-
-    var checkboxes = document.querySelectorAll('input[type="checkbox"][name="location"]');
+    
+    var checkboxes = document.querySelectorAll('input[type="checkbox"][name="location"], input[type="checkbox"][name="salary"]');
     checkboxes.forEach(function(checkbox) {
         checkbox.addEventListener('change', function() {
             var selectedLocations = [];
+            var selectedSalaries = []; // Corrected variable name
+            count=0;
             document.querySelectorAll('input[type="checkbox"][name="location"]:checked').forEach(function(checkedCheckbox) {
                 selectedLocations.push(checkedCheckbox.value);
+                count++;
+
             });
-            fetchJobsByLocation(selectedLocations);
+            document.querySelectorAll('input[type="checkbox"][name="salary"]:checked').forEach(function(checkedCheckbox) {
+                selectedSalaries.push(checkedCheckbox.value); // Push salary values into selectedSalaries array
+                count++;
+            });
+
+            document.querySelectorAll('input[type="checkbox"][name="exp"]:checked').forEach(function(checkedCheckbox) {
+                selectedSalaries.push(checkedCheckbox.value); // Push salary values into selectedSalaries array
+                count++;
+            });
+    
+            var filters = {
+                locations: selectedLocations,
+                salaries: selectedSalaries
+                // Add more criteria here if needed
+            };
+    
+            // Send filters to fetch function
+            console.log("hello" +count);
+            document.querySelector("#count").innerHTML = count;
+            fetchJobs(filters);
         });
     });
-
-    fetchJobsByLocation([]);
+    
+    // Initial fetch with default filters (empty filters)
+    
+    var filters = {
+        locations: [],
+        salaries: []
+        // Add more criteria here if needed
+    };
+    fetchJobs(filters);
+    
 });
+
+
 
 
 
@@ -169,6 +203,15 @@ function check(jobId) {
     
     // Open the jobdata page with the jobid as a query parameter in a new tab
     window.open("/jobdata" + "?jobid=" + jobId, "_blank");
+}
+
+function showfilter(filterType) {
+    var filterSection = document.querySelector('#' + filterType);
+    if (filterSection.style.display === 'none' || !filterSection.style.display) {
+        filterSection.style.display = 'block';
+    } else {
+        filterSection.style.display = 'none';
+    }
 }
 
 

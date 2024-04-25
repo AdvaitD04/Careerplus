@@ -197,4 +197,34 @@ if (daysDiff === 0) {
 
 // fetching all necessary data 
 
+function accept(id,userid){
+    alert(userid)
+    var data = {
+        id : id,
+        userid:userid 
+    }
+    fetch('/Dashboardemployer', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(datajob => {
+        id = datajob;
+        console.log('Received data:', id);
+        printJobData(id);
+    })
+    .catch(error => {
+        console.error('Error fetching job listings:', error);
+    });
+
+}
+
 

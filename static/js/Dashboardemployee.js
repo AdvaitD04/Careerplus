@@ -1,5 +1,4 @@
 // Get the form element by its class name
-
 var form = document.querySelector('.datasection');
 
 // Get all input and select elements within the form
@@ -31,21 +30,6 @@ function enableInputs() {
     document.getElementById('saveButton').style.display = 'inline-block';
 }
 
-// function saveInputs() {
-//     var inputs = document.querySelectorAll('.box1 .datasection input, .box1 .datasection select');
-//     for (var i = 0; i < inputs.length; i++) {
-//         inputs[i].readOnly = true;
-//         inputs[i].disabled = true;
-//     }
-//     document.getElementById('editButton').style.display = 'inline-block';
-//     document.getElementById('saveButton').style.display = 'none';
-// }
-
-
-
-
-
-//taking data input
 function saveInputs() {
     var profileData = {
         personal_info: {
@@ -97,4 +81,59 @@ function showPopup() {
     }, 500); // Hide popup after 2 seconds
 }
 
-// fetching all necessary data 
+// Function to handle file upload
+// Function to handle file upload
+
+
+
+// Define the fetch request outside the function
+const form1 = document.getElementById('form');
+
+form1.addEventListener('submit', function(event) {
+  // Prevent default HTML page refresh
+  event.preventDefault();
+
+  // Select file upload element
+  const uploadElement = document.getElementById('file');
+
+  // Extract the file (for a single file, always 0 in the list)
+  const file = uploadElement.files[0];
+
+  // Create new formData object then append file
+  const payload = new FormData();
+  payload.append('CV', file, 'CV.pdf');
+
+  // POST/PUT with Fetch API
+  fetch('https://httpbin.org/post', {
+    method: "POST", // or "PUT"
+    body: payload,
+    // No content-type! With FormData obect, Fetch API sets this automatically.
+    // Doing so manually can lead to an error
+  })
+  .then(res => res.json())
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
+});
+
+//input drop box
+const dropContainer = document.getElementById("dropcontainer")
+const fileInput = document.getElementById("images")
+
+dropContainer.addEventListener("dragover", (e) => {
+    // prevent default to allow drop
+    e.preventDefault()
+}, false)
+
+dropContainer.addEventListener("dragenter", () => {
+    dropContainer.classList.add("drag-active")
+})
+
+dropContainer.addEventListener("dragleave", () => {
+    dropContainer.classList.remove("drag-active")
+})
+
+dropContainer.addEventListener("drop", (e) => {
+    e.preventDefault()
+    dropContainer.classList.remove("drag-active")
+    fileInput.files = e.dataTransfer.files
+})

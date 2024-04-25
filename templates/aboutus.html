@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us - Job Portal</title>
+  <title>About Us - Careerplus</title>
   <style>
     nav{
     display: flex;
@@ -156,6 +156,63 @@ nav .left button:hover{
       font-weight: bold;
       color: #007700; /* Green color */
     }
+
+    .lowerbox{
+      width:70vw;
+      /* height:400px; */
+      /* background-color: rgb(255, 255, 255); */
+      margin:auto auto 30px auto;
+      position: relative;
+      /* text-align: center; */
+      color: rgb(0, 0, 0);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .lowerbox .box{
+      position: relative;
+      width: 95%;
+      height: 80%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap:30px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      background-color:rgb(234, 234, 234);
+      border-radius: 10px;
+      flex-wrap: wrap;
+      padding:30px 0px;
+    }
+
+    .lowerbox .box .databox{
+      position: relative;
+      width: 200px;
+      height: 250px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+      background-color:rgba(255, 255, 255, 0.455);
+
+    }
+
+    .lowerbox .box .databox:hover{
+      
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      background-color:rgba(255, 255, 255, 0.455);
+      
+      background-color:rgba(158, 224, 158, 0.362);
+      top:-10px;
+      transition: box-shadow 0.5s, background-color 0.5s, top 1s;
+    }
+
+
+
+    
   </style>
 </head>
 <body>
@@ -179,10 +236,31 @@ nav .left button:hover{
     </nav>
   <div class="container">
     <h1>About Us</h1>
-    <p>Welcome to our job portal! We are dedicated to connecting talented individuals with exciting job opportunities. Our mission is to simplify the job search process for both job seekers and employers.</p>
-    <p>At <span class="highlight">Job Portal</span>, we understand the challenges of finding the right job or the perfect candidate. That's why we've created a user-friendly platform that streamlines the hiring process.</p>
+    <p>Welcome to our Careerplus! We are dedicated to connecting talented individuals with exciting job opportunities. Our mission is to simplify the job search process for both job seekers and employers.</p>
+    <p>At <span class="highlight">Careerplus</span>, we understand the challenges of finding the right job or the perfect candidate. That's why we've created a user-friendly platform that streamlines the hiring process.</p>
     <p>Whether you're a job seeker looking for your dream job or an employer seeking top talent, we're here to help you succeed. Our team is committed to providing excellent service and support every step of the way.</p>
-    <p>Thank you for choosing <span class="highlight">Job Portal</span> for your job search or recruitment needs. We look forward to helping you achieve your goals!</p>
+    <p>Thank you for choosing <span class="highlight">Careerplus</span> for your job search or recruitment needs. We look forward to helping you achieve your goals!</p>
+  </div>
+  <div class="lowerbox">
+    <h1>Our team</h1>
+    <div class="box">
+      <div class="databox">
+        <h2>Advait Desai</h2>
+        
+      </div>
+      <div class="databox">
+        <h2>Omkar Jadhav</h2>
+        
+      </div>
+      <div class="databox">
+        <h2>Rahul Iyer</h2>
+        
+      </div>
+      <div class="databox">
+        <h2>Shreyas Jadhav</h2>
+        
+      </div>
+    </div>
   </div>
 </body>
 </html>

@@ -19,7 +19,7 @@
             <a href="Home">Home</a>
             <a href="#">About</a>
             <a href="#">Help</a>
-            <a href="/login"><button>LogIn</button></a>
+            <a href="{{url_for('logout')}}"><button>LogOut</button></a>
            
         </div>
     </nav>
@@ -32,24 +32,68 @@
 
     <div class="left">
         <div class="lbox flexbc">
-            <div class="toplbox flexbr">Filters</div>
+            <div class="toplbox flexbr"><span>Filters</span><span id="count">4</span></div>
             <div class="bottomlbox flexbc">
                 <div class="tag flexbc">
-                    <div>Location</div>
-                    <div class="flexbc">
+                    <div onclick="showfilter('location')" class="tagdata"><span>location</span>
+                    <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                      </svg></span></div>
+                    <div class="flexbc" id ="location" style="display: none;">
                 <span><input type="checkbox" id="location1" name="location" value="Banglore">
                     <label for="location1">Banglore</label><br></span>
                 <span><input type="checkbox" id="location2" name="location" value="Hyderabad">
                     <label for="location2">Hyderabad</label><br></span>
                 <span><input type="checkbox" id="location3" name="location" value="Delhi">
-                    <label for="location3">Delhi</label><br></span>  
+                    <label for="location3">Delhi</label><br></span>
+                    <span><input type="checkbox" id="location4" name="location" value="Mumbai">
+                        <label for="location4">Mumbai</label><br></span>  
                 </div>
                 </div>  
+
+                <div class="tag flexbc salary">
+                    <div onclick="showfilter('salarybox')"><span>Salary</span>
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                          </svg></span></div>
+                    <div class="flexbc" id="salarybox" style="display: none;">
+                <span><input type="checkbox" id="salary1" name="salary" value="10k-20k">
+                    <label for="salary1">10k-20k</label><br></span>
+                <span><input type="checkbox" id="salary2" name="salary" value="20k-30k">
+                    <label for="salary2">20k-30k</label><br></span>
+                <span><input type="checkbox" id="salary3" name="salary" value="30k-40k">
+                    <label for="salary3">30k-40k</label><br></span>
+                <span><input type="checkbox" id="salary4" name="salary" value="40k-50k">
+                    <label for="salary4">40k-50k</label><br></span>
+                <span><input type="checkbox" id="salary5" name="salary" value="50k-60k">
+                    <label for="salary5">50k-60k</label><br></span>
+                <span><input type="checkbox" id="salary6" name="salary" value="100k">
+                     <label for="salary5">100k</label><br></span>               
+                </div>
+                </div>
+                
+                <div class="tag flexbc type">
+                    <div onclick="showfilter('exp')"><span>Experience</span>
+                        <span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                          </svg></span></div>
+                    <div class="flexbc" id="exp" style="display: none;">
+                <span><input type="checkbox" id="exp1" name="exp" value="0-1">
+                    <label for="exp1">0-1</label><br></span>
+                <span><input type="checkbox" id="exp2" name="exp" value="0-2">
+                    <label for="exp2">0-2</label><br></span>
+                <span><input type="checkbox" id="exp3" name="exp" value="0-3">
+                    <label for="exp3">0-3</label><br></span>  
+                </div>
+                </div>
+                
+                
                 
               
             </div>
         </div>
     </div>
+   
 
 
     
@@ -59,7 +103,7 @@
 
 
     <div class="mid flexbc">
-        
+        <div id="nodata" style="color:green; display:none"><h2>No data found, try different filters</h2></div>
         <div id="jobboxes" class="mbox flexbc" style="display: none">
             <div class="btop flexbr">
                 <div class="bright flexbc"><span id="role">JAVA Developer - MNC Company, Chennai.</span>
